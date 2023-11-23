@@ -280,8 +280,9 @@ public final class CompMetadata {
 			return false;
 
 		final NBTItem nbt = new NBTItem(item);
+		final NBTCompound compound = (NBTCompound) nbt.getCompound();
 
-		return nbt.hasTag(key);
+		return compound.hasTag(key);
 	}
 
 	/**
