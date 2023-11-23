@@ -117,6 +117,8 @@ public final class FoConstants {
 		 */
 		public static final String TAG = SimplePlugin.getNamed() + "_NbtTag";
 
+		public static final String Default = "tag";
+
 		/**
 		 * An internal metadata tag the player gets when he opens the menu.
 		 *
