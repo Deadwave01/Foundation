@@ -280,9 +280,8 @@ public final class CompMetadata {
 			return false;
 
 		final NBTItem nbt = new NBTItem(item);
-		final NBTCompound tag = nbt.getCompound(FoConstants.NBT.Default);
 
-		return tag != null && tag.hasTag(key);
+		return nbt.hasTag(key);
 	}
 
 	/**
