@@ -270,6 +270,22 @@ public final class CompMetadata {
 	}
 
 	/**
+	 * Return true if the given ItemStack has the given key stored at its default tag (tag:...)
+	 */
+	public static boolean hasMetadataDefault(final ItemStack item, final String key) {
+		Valid.checkBoolean(MinecraftVersion.atLeast(V.v1_7), "NBT ItemStack tags only support MC 1.7.10+");
+		Valid.checkNotNull(item, "Item is null");
+
+		if (CompMaterial.isAir(item.getType()))
+			return false;
+
+		final NBTItem nbt = new NBTItem(item);
+		final NBTCompound tag = nbt.getCompound(FoConstants.NBT.Default);
+
+		return tag != null && tag.hasTag(key);
+	}
+
+	/**
 	 * Returns true if the entity has the given metadata key.<br>
 	 * First checks scoreboard tags, and then bukkit metadata.
 	 */
