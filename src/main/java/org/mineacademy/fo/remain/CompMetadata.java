@@ -278,7 +278,7 @@ public final class CompMetadata {
 
 		final NBTItem nbt = new NBTItem(item);
 
-		return nbt.hasKey(key);
+		return nbt.hasTag(key);
 	}
 
 	/**
