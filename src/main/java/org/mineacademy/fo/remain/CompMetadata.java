@@ -29,10 +29,7 @@ import org.mineacademy.fo.remain.nbt.NBTCompound;
 import org.mineacademy.fo.remain.nbt.NBTItem;
 import org.mineacademy.fo.settings.YamlConfig;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Utility class for persistent metadata manipulation
@@ -283,6 +280,19 @@ public final class CompMetadata {
 		final NBTCompound compound = (NBTCompound) nbt.getCompound();
 
 		return compound.hasTag(key);
+	}
+
+	public static Set<String> getMetadataDefault(final ItemStack item){
+		Valid.checkBoolean(MinecraftVersion.atLeast(V.v1_7), "NBT ItemStack tags only support MC 1.7.10+");
+		Valid.checkNotNull(item, "Item is null");
+
+		if (CompMaterial.isAir(item.getType()))
+			return null;
+
+		final NBTItem nbt = new NBTItem(item);
+		final NBTCompound compound = (NBTCompound) nbt.getCompound();
+
+		return compound.getKeys();
 	}
 
 	/**
