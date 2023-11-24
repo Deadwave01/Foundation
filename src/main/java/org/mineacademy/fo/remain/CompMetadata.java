@@ -267,8 +267,20 @@ public final class CompMetadata {
 	}
 
 	/**
-	 * Return true if the given ItemStack has the given key stored at its default tag (tag:...)
+	 * Return value for key which in the container "tag"
 	 */
+	public static String getMetadataDefault(final ItemStack item, final String key) {
+		Valid.checkBoolean(MinecraftVersion.atLeast(V.v1_7), "NBT ItemStack tags only support MC 1.7.10+");
+		Valid.checkNotNull(item, "Item is null");
+
+		if (CompMaterial.isAir(item.getType()))
+			return null;
+
+		final NBTItem nbt = new NBTItem(item);
+
+		return nbt.getKeys().stream().filter(k -> k.equals(key)).findFirst().orElse(null);
+	}
+
 	public static boolean hasMetadataDefault(final ItemStack item, final String key) {
 		Valid.checkBoolean(MinecraftVersion.atLeast(V.v1_7), "NBT ItemStack tags only support MC 1.7.10+");
 		Valid.checkNotNull(item, "Item is null");
