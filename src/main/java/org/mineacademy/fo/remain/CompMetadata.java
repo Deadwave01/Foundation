@@ -72,6 +72,19 @@ public final class CompMetadata {
 	}
 
 	/**
+	 *  Set persistent key-value for default container "tag"
+	 */
+
+	public static ItemStack setMetadataDefault(final ItemStack item, final String key, final String value) {
+		Valid.checkNotNull(item, "Item is null");
+
+		final NBTItem nbt = new NBTItem(item);
+		final NBTCompound tag = nbt.getParent();
+		tag.setString(key, value);
+		return nbt.getItem();
+	}
+
+	/**
 	 * Set persistent tag on entity.
 	 */
 	public static void setMetadata(final Entity entity, final String tag) {
