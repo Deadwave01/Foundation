@@ -272,6 +272,12 @@ public final class ItemCreator {
 		return this;
 	}
 
+	public ItemCreator newLore(List<String> lore){
+		this.lores.clear();
+		this.lores.addAll(lore);
+		return this;
+	}
+
 	/**
 	 * Add the given enchant to the item.
 	 *
