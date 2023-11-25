@@ -291,7 +291,7 @@ public final class CompMetadata {
 
 		final NBTItem nbt = new NBTItem(item);
 
-		return nbt.getOrDefault(key, null);
+		return nbt.getString(key);
 	}
 
 	public static boolean hasMetadataDefault(final ItemStack item, final String key) {
