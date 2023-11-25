@@ -290,8 +290,9 @@ public final class CompMetadata {
 			return null;
 
 		final NBTItem nbt = new NBTItem(item);
+		final NBTCompound compound = nbt.getParent();
 
-		return nbt.getKeys().stream().filter(k -> k.equals(key)).findFirst().orElse(null);
+		return compound.getString(key);
 	}
 
 	public static boolean hasMetadataDefault(final ItemStack item, final String key) {
