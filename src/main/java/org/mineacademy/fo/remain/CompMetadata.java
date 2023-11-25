@@ -72,15 +72,26 @@ public final class CompMetadata {
 	}
 
 	/**
-	 *  Set persistent key-value for default container "tag"
+	 *  Set persistent key-value(integer) for default container "tag"
 	 */
 
-	public static ItemStack setMetadataDefault(final ItemStack item, final String key, final String value) {
+	public static ItemStack setMetadataDefaultInteger(final ItemStack item, final String key, final String value) {
 		Valid.checkNotNull(item, "Item is null");
 
 		final NBTItem nbt = new NBTItem(item);
-		final NBTCompound tag = nbt.getParent();
-		tag.setString(key, value);
+		nbt.setInteger(key, Integer.valueOf(value));
+		return nbt.getItem();
+	}
+
+	/**
+	 *  Set persistent key-value(string) for default container "tag"
+	 */
+
+	public static ItemStack setMetadataDefaultString(final ItemStack item, final String key, final String value) {
+		Valid.checkNotNull(item, "Item is null");
+
+		final NBTItem nbt = new NBTItem(item);
+		nbt.setString(key, value);
 		return nbt.getItem();
 	}
 
@@ -282,7 +293,22 @@ public final class CompMetadata {
 	/**
 	 * Return value for key which in the container "tag"
 	 */
-	public static String getMetadataDefault(final ItemStack item, final String key) {
+	public static Integer getMetadataDefaultInteger(final ItemStack item, final String key) {
+		Valid.checkBoolean(MinecraftVersion.atLeast(V.v1_7), "NBT ItemStack tags only support MC 1.7.10+");
+		Valid.checkNotNull(item, "Item is null");
+
+		if (CompMaterial.isAir(item.getType()))
+			return null;
+
+		final NBTItem nbt = new NBTItem(item);
+
+		return nbt.getInteger(key);
+	}
+
+	/**
+	 * Return string value for key which in the container "tag"
+	 */
+	public static String getMetadataDefaultString(final ItemStack item, final String key) {
 		Valid.checkBoolean(MinecraftVersion.atLeast(V.v1_7), "NBT ItemStack tags only support MC 1.7.10+");
 		Valid.checkNotNull(item, "Item is null");
 
